@@ -1,4 +1,4 @@
-import pygame,sys,classes,images
+import pygame,sys,classes,images,time
 from pygame.locals import *
 import rgbcolorlist as color
 
@@ -9,6 +9,8 @@ pygame.display.set_caption("Amazing Airport")
 screen = pygame.display.set_mode((1080,720),0,32)
 
 md = 0
+
+name = ''
 
 def set_screen(mode,time):
     if mode == 0:
@@ -39,19 +41,19 @@ def start_action(time):
     elif time<=65:
         screen.blit(images.start_action10,(0,0))
     else:
-        screen.blit(images.start_actionmain,(0,0))
         homepage_btn()
             
 def homepage_btn():
+    screen.blit(images.start_actionmain,(0,0))
     pygame.draw.rect(screen,[199,150,111],[440,350,200,50],0)
-    test = classes.text("New Game",40,color.white,"font/Crimes-Times-Six-1.ttf")
-    screen.blit(test.getImage(),(460,355))
+    text = classes.text("New Game",40,color.white,"font/Crimes-Times-Six-1.ttf")
+    screen.blit(text.getImage(),(460,355))
     pygame.draw.rect(screen,[199,150,111],[440,450,200,50],0)
-    test = classes.text("Loading",40,color.white,"font/Crimes-Times-Six-1.ttf")
-    screen.blit(test.getImage(),(490,455))
+    text = classes.text("Loading",40,color.white,"font/Crimes-Times-Six-1.ttf")
+    screen.blit(text.getImage(),(490,455))
     pygame.draw.rect(screen,[199,150,111],[440,550,200,50],0)
-    test = classes.text("Exit",40,color.white,"font/Crimes-Times-Six-1.ttf")
-    screen.blit(test.getImage(),(500,555))
+    text = classes.text("Exit",40,color.white,"font/Crimes-Times-Six-1.ttf")
+    screen.blit(text.getImage(),(500,555))
     for event in pygame.event.get():
         if event.type in (QUIT,KEYDOWN):
             sys.exit()
@@ -59,16 +61,35 @@ def homepage_btn():
             x,y = pygame.mouse.get_pos()
             if(x>=430 and x<=650 and y>=340 and y<=410):
                 test = classes.text("New Game",40,color.blue,"font/Crimes-Times-Six-1.ttf")
-                screen.blit(test.getImage(),(460,355))
+                screen.blit(text.getImage(),(460,355))
                 global md 
                 md = 1
             elif(x>=430 and x<=650 and y>=440 and y<=510):
-                test = classes.text("Loading",40,color.blue,"font/Crimes-Times-Six-1.ttf")
-                screen.blit(test.getImage(),(490,455))
+                text = classes.text("Loading",40,color.blue,"font/Crimes-Times-Six-1.ttf")
+                screen.blit(text.getImage(),(490,455))
             elif(x>=430 and x<=650 and y>=540 and y<=610):
-                test = classes.text("Exit",40,color.blue,"font/Crimes-Times-Six-1.ttf")
-                screen.blit(test.getImage(),(500,555))
+                text = classes.text("Exit",40,color.blue,"font/Crimes-Times-Six-1.ttf")
+                screen.blit(text.getImage(),(500,555))
                 sys.exit()
 
 def new_game():
     screen.blit(images.normal_background,(0,0))
+    text = classes.text("Add Your Name:",40,color.Chocolate4,"font/Crimes-Times-Six-1.ttf")
+    screen.blit(text.getImage(),(400,300))
+    event = pygame.event.poll()
+    if event.type == KEYDOWN:
+        global name
+        print(event.key)
+        if event.key == K_RETURN:
+            text = classes.text("OK",40,color.white,"font/Crimes-Times-Six-1.ttf")
+            screen.blit(text.getImage(),(500,500))
+        elif event.key == K_BACKSPACE:
+            name = name[:-1]
+        else:
+            name += chr(event.key)
+        
+    else:
+      pass
+    text = classes.text(name,40,color.white,"font/Crimes-Times-Six-1.ttf")
+    x = 540 - len(name)*10
+    screen.blit(text.getImage(),(x,450))
