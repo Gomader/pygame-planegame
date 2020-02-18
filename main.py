@@ -2,7 +2,7 @@ import pygame,sys,mouse,screen
 from pygame.locals import *
 
 clock = pygame.time.Clock()
-fps = 30
+fps = 60
 time = 0
 mode = 0
 

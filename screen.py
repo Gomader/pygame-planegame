@@ -21,28 +21,42 @@ backgroundmain = pygame.image.load("images/homepagegif/main.jpg")
 
 def set_screen(mode,time):
     if mode == 0:
-        if time<=20:
-            screen.blit(background1,(0,0))
-        elif time<=25:
-            screen.blit(background2,(0,0))
-        elif time<=30:
-            screen.blit(background3,(0,0))
-        elif time<=35:
-            screen.blit(background4,(0,0))
-        elif time<=40:
-            screen.blit(background5,(0,0))
-        elif time<=45:
-            screen.blit(background6,(0,0))
-        elif time<=50:
-            screen.blit(background7,(0,0))
-        elif time<=55:
-            screen.blit(background8,(0,0))
-        elif time<=60:
-            screen.blit(background9,(0,0))
-        elif time<=65:
-            screen.blit(background10,(0,0))
-        else:
-            screen.blit(backgroundmain,(0,0))
-            pygame.draw.rect(screen,[199,150,111],[440,350,200,50],0)
-            test = classes.text("New Game",40,color.white,"font/Crimes-Times-Six-1.ttf")
-            screen.blit(test.getImage(),(460,355))
+        start_action(time)
+        
+
+def start_action(time):
+    if time<=20:
+        screen.blit(background1,(0,0))
+    elif time<=25:
+        screen.blit(background2,(0,0))
+    elif time<=30:
+        screen.blit(background3,(0,0))
+    elif time<=35:
+        screen.blit(background4,(0,0))
+    elif time<=40:
+        screen.blit(background5,(0,0))
+    elif time<=45:
+        screen.blit(background6,(0,0))
+    elif time<=50:
+        screen.blit(background7,(0,0))
+    elif time<=55:
+        screen.blit(background8,(0,0))
+    elif time<=60:
+        screen.blit(background9,(0,0))
+    elif time<=65:
+        screen.blit(background10,(0,0))
+    else:
+        screen.blit(backgroundmain,(0,0))
+        homepage_btn()
+            
+def homepage_btn():
+    pygame.draw.rect(screen,[199,150,111],[440,350,200,50],0)
+    test = classes.text("New Game",40,color.white,"font/Crimes-Times-Six-1.ttf")
+    screen.blit(test.getImage(),(460,355))
+    for event in pygame.event.get():
+        if event.type == MOUSEBUTTONDOWN:
+            x,y = pygame.mouse.get_pos()
+            if(x>=430 and x<=650 and y>=340 and y<=410):
+                test = classes.text("New Game",40,color.blue,"font/Crimes-Times-Six-1.ttf")
+                screen.blit(test.getImage(),(460,355))
+    
