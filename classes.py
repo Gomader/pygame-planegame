@@ -18,3 +18,12 @@ class text:
         myfont = pygame.font.Font(self.family,self.size)
         textImage = myfont.render(self.inner,True,self.color)
         return textImage
+
+
+class game:
+
+    username = ''
+    money = 1000000
+    contract = []
+    runway = 1
+    
