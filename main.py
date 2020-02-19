@@ -9,7 +9,7 @@ if __name__ == "__main__":
     while True:
         clock.tick(fps)
         for event in pygame.event.get():
-            if event.type in (QUIT,KEYDOWN):#I have test this place, when we start another loop in other files' function here the function will be no effect
+            if event.type == QUIT:#I have test this place, when we start another loop in other files' function here the function will be no effect
                 sys.exit()
 
         time += 1

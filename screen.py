@@ -17,6 +17,8 @@ def set_screen(mode,time):
         start_action(time)
     elif mode == 1:
         new_game()
+    elif mode == 2:
+        gaming()
         
 
 def start_action(time):
@@ -76,20 +78,27 @@ def new_game():
     screen.blit(images.normal_background,(0,0))
     text = classes.text("Add Your Name:",40,color.Chocolate4,"font/Crimes-Times-Six-1.ttf")
     screen.blit(text.getImage(),(400,300))
-    event = pygame.event.poll()
-    if event.type == KEYDOWN:
-        global name
-        print(event.key)
-        if event.key == K_RETURN:
-            text = classes.text("OK",40,color.white,"font/Crimes-Times-Six-1.ttf")
-            screen.blit(text.getImage(),(500,500))
-        elif event.key == K_BACKSPACE:
-            name = name[:-1]
-        else:
-            name += chr(event.key)
-        
-    else:
-      pass
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            sys.exit()
+        elif event.type == KEYDOWN:
+            global name
+            if event.key == K_RETURN:
+                text = classes.text("OK",40,color.white,"font/Crimes-Times-Six-1.ttf")
+                screen.blit(text.getImage(),(500,500))
+                global user
+                user = classes.game(name)
+                time.sleep(2)
+                global md
+                md = 2
+            elif event.key == K_BACKSPACE:
+                name = name[:-1]
+            else:
+                name += chr(event.key)
     text = classes.text(name,40,color.white,"font/Crimes-Times-Six-1.ttf")
     x = 540 - len(name)*10
     screen.blit(text.getImage(),(x,450))
+
+def gaming():
+    screen.blit(images.normal_background,(0,0))
+    
